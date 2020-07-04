@@ -10,7 +10,7 @@ using System.Drawing;
 namespace AntDesign.Colors.Tests
 {
     [TestClass()]
-    public class AntDesignColorTests
+    public class ColorHelperTests
     {
 
         public static IEnumerable<object[]> GenerateHexStringParsingTestCase()
@@ -30,9 +30,9 @@ namespace AntDesign.Colors.Tests
         {
             string sa = color.ToHexString(true);
             string s = color.ToHexString();
-            Assert.AreEqual(color, AntDesignColor.FromHexString(sa));
+            Assert.AreEqual(color, ColorHelper.FromHexString(sa));
             Color color2 = Color.FromArgb(255, color);
-            Assert.AreEqual(color2, AntDesignColor.FromHexString(s));
+            Assert.AreEqual(color2, ColorHelper.FromHexString(s));
         }
 
 
@@ -60,7 +60,7 @@ namespace AntDesign.Colors.Tests
         [DynamicData(nameof(GetHexStringSpecialTestCase), DynamicDataSourceType.Method)]
         public void FromHexStringSpecialCaseTest(Color color, string hexString)
         {
-            Assert.AreEqual(color, AntDesignColor.FromHexString(hexString));
+            Assert.AreEqual(color, ColorHelper.FromHexString(hexString));
         }
 
         public static IEnumerable<object[]> GenerateHexStringTestCase()
@@ -89,13 +89,13 @@ namespace AntDesign.Colors.Tests
         [DynamicData(nameof(GenerateColorMixTestCase), DynamicDataSourceType.Method)]
         public void MixTests(Color color1, Color color2, double ratio, Color result)
         {
-            Assert.AreEqual(result, AntDesignColor.Mix(color1, color2, ratio));
+            Assert.AreEqual(result, ColorHelper.Mix(color1, color2, ratio));
         }
 
         [TestMethod()]
         public void FromHSVTest()
         {
-            Color color = AntDesignColor.FromHSV(201, 0.5, 0.52);
+            Color color = ColorHelper.FromHSV(201, 0.5, 0.52);
             Console.WriteLine(color.ToHexString());
         }
     }

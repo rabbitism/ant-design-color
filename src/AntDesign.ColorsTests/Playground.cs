@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Drawing;
 using AntDesign.Colors;
 
-namespace AntDesign.ColorTests
+namespace AntDesign.Colors.Tests
 {
     [TestClass()]
     public class Playground
@@ -17,22 +17,27 @@ namespace AntDesign.ColorTests
         {
             string hexString = "406A80";
             Console.WriteLine(hexString);
-            Color color = AntDesignColor.FromHexString(hexString);
+            Color color = ColorHelper.FromHexString(hexString);
             Console.WriteLine(color.R);
             Console.WriteLine(color.G);
             Console.WriteLine(color.B);
-            (int h, double s, double v) = AntDesignColor.GetHSV(color);
+            (double h, double s, double v) = ColorHelper.GetHSV(color);
             Console.WriteLine(h);
             Console.WriteLine(s);
             Console.WriteLine(v);
-            Color color2 = AntDesignColor.FromHSV(h, s, v);
+            Color color2 = ColorHelper.FromHSV(h, s, v);
             Console.WriteLine(color2.ToHexString());
         }
 
         [TestMethod()]
         public void Play()
         {
-            Console.WriteLine((int)(200.7));
+            Color color = ColorHelper.FromHexString("#f5222d");
+            List<Color> colors = ColorHelper.GetPallete(color);
+            foreach(Color c in colors)
+            {
+                Console.WriteLine(c.ToHexString());
+            }
         }
     }
 }
